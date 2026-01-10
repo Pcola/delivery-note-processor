@@ -1,15 +1,20 @@
 package sk.moonid.processor.dto;
 
-import lombok.Value;
-
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
-@Value
-public class DeliveryNoteDTO {
-    Long id;
-    LocalDate uploadedAt;
-    String filename;
-    String status;
-    List<DeliveryItemDTO> items;
-}
+public record DeliveryNoteDTO(
+        String deliveryNumber,
+        LocalDate deliveryDate,
+        String orderNumber,
+        String supplier,
+        String supplierTaxId,
+        String recipient,
+        String recipientAddress,
+        String transportType,
+        LocalDateTime uploadedAt,
+        String filename,
+        String status,
+        List<DeliveryItemDTO> items
+) {}

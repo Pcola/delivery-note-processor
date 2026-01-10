@@ -23,12 +23,18 @@ public class DeliveryItem {
     @JoinColumn(name = "delivery_note_id", nullable = false)
     private DeliveryNote deliveryNote;
 
+    @Column(name = "product_code", length = 50)
+    private String productCode;         // 811, 9939...
+
     @Column(name = "product_name", nullable = false, length = 500)
     private String productName;
+
+    @Column(name = "warehouse", length = 50)
+    private String warehouse;           // ES
 
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
-    @Column(name = "extracted_data", length = 1000)
-    private String extractedData;
+    @Column(name = "unit", length = 20)
+    private String unit;                // ks
 }

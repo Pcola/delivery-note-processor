@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import sk.moonid.processor.dto.DeliveryNoteDTO;
+import sk.moonid.processor.exception.FileUploadException;
 import sk.moonid.processor.service.DeliveryNoteService;
 
 @AllArgsConstructor
@@ -21,8 +22,13 @@ public class DeliveryNoteController {
     public ResponseEntity<DeliveryNoteDTO> upload(@RequestParam("file") MultipartFile file) {
 
         if (file == null || file.isEmpty()) {
-            return ResponseEntity.badRequest().build();
+            throw new FileUploadException("File is empty", "FILE_EMPTY");
         }
+
+        if (file.getSize() > 10_000_000) {
+            throw new FileUploadException("File size exceeds 10MB limit", "FILE_TOO_LARGE");
+        }
+
 
         DeliveryNoteDTO dto = deliveryNoteService.processUpload(file);
 

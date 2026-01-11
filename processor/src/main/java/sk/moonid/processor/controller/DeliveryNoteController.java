@@ -22,7 +22,7 @@ public class DeliveryNoteController {
     public ResponseEntity<DeliveryNoteDTO> upload(@RequestParam("file") MultipartFile file) {
 
         if (file == null || file.isEmpty()) {
-            throw new FileUploadException("File is empty", "FILE_EMPTY");
+            throw new FileUploadException("File is empty. Please upload a valid file.", "FILE_EMPTY");
         }
 
         if (file.getSize() > 10_000_000) {
